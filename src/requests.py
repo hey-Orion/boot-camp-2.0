@@ -9,7 +9,7 @@ def get_info(name):
     if response.status_code == 200:
         return response.json()
     else:
-        print("Error:", response.status_code)
+        print("error:", response.status_code)
         return None
 
 pokemon_name = "pikachu"
@@ -24,22 +24,20 @@ if pokemon_info:
 else:
     print("Pokémon not found.")
 
-
-
 response = requests.get(
-    "https://api.example.com/v1/data",
+    "https://pokeapi.co/api/v2",
     timeout=10
 )
 response.raise_for_status()
 data = response.json()
 
 def fetch_all_pages(base_url: str) -> list[dict]:
-    results, page = [], 1
+    results, page = [], 1 
 
     while True:
         resp = requests.get(
             base_url,
-            params={"page": page},
+            perams={"page": page},
             timeout=10
         )
 
@@ -50,7 +48,7 @@ def fetch_all_pages(base_url: str) -> list[dict]:
             break
 
         results.extend(batch)
-        page += 1
+        page += 1 
 
     return results
 
@@ -59,7 +57,7 @@ headers = {
 }
 
 response = requests.post(
-    "https://api.example.com/v1/records",
+    "https://pokeapi.co/api/v2",
     json=payload,
     headers=headers,
     timeout=10
