@@ -36,3 +36,21 @@ on s.user_id = a.user_id
 left join paid p 
 on s.user_id = p.user_id;
 
+
+
+select 
+    order_id,
+    order_date,
+    amount,
+    sum(amount) over (order by order_date) as running_total,
+    round(
+        100.0 * amount / sum(amount) over (), 2 
+    ) as pct_of_total
+from orders 
+order by order_date;
+
+select u.user_id, u.name
+from users u 
+left join orders o on u.user_id = o.user_id
+where o.order_id is NULL;
+
