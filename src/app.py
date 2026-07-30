@@ -127,3 +127,5 @@ def test_summarize_by_user_totals(sample_transactions):
     assert result[1]["total"] == 80
     assert result[2]["total"] == 20
     
+
+
