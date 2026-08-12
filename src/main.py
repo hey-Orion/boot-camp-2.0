@@ -7,3 +7,5 @@ def process_user_events(events: list[dict]) -> dict[str, int]:
 
         event_type = event["event_type"].lower().strip()
         counts[event_type] = counts.get(event_type, 0) + 1
+
+
