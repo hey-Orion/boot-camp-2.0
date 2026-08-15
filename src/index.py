@@ -131,3 +131,50 @@ try:
 except requests.exceptions.RequestException as e:
     print(f"Request failed: {e}")
     data = None
+
+
+
+from pydantic import BaseModel, Field, field_validator
+from typing import Optional
+
+# 1. Basic model with a required field constraint
+class Product(BaseModel):
+    name: str = Field(min_length=1)
+    price: float
+    in_stock: bool = True
+
+
+# 2. Nested model
+class Address(BaseModel):
+    city: str
+    country: str
+
+class User(BaseModel):
+    user_id: int
+    address: Address
+
+
+# 3. Optional field + default value
+class Transaction(BaseModel):
+    amount: float
+    note: Optional[str] = None
+
+
+# 4. Custom field validation
+class Order(BaseModel):
+    quantity: int
+
+    @field_validator("quantity")
+    @classmethod
+    def quantity_must_be_positive(cls, v):
+        if v <= 0:
+            raise ValueError("quantity must be positive")
+        return v
+
+
+# 5. Validating a list of raw dicts into models
+raw_records = [
+    {"name": "widget", "price": 9.99},
+    {"name": "gadget", "price": 19.99},
+]
+validated_products = [Product(**r) for r in raw_records]
