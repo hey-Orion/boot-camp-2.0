@@ -1,81 +1,53 @@
-select 
-    date_trunc('month', u.signup_date) as cohort_month,
-    count(distinct u.user_id) as cohort_size,
-    count(
-        distinct case
-            when u.is_active
-            then u.user_id
-        end
-    ) as still_active 
-from users u 
-group by date_trunc('month', u.signup_date)
-order by cohort_month;
-
-
-with signups as (
-    select user_id, created_at from users
-),
-activated as (
-    select distinct user_id
-    from events
-    where status = 'active'
-)
-
-paid as (
-    select distinct user_id
-    from sub
-    where status = 'active'
-)
-select 
-    count(distinct s.user_id) as total_signups,
-    count(distinct a.user_id) as total_activated,
-    count(distinct p.user_id) as total_paid
-from signups s 
-left join activated a 
-on s.user_id = a.user_id
-left join paid p 
-on s.user_id = p.user_id;
-
-
-
-select 
-    order_id,
-    order_date,
-    amount,
-    sum(amount) over (order by order_date) as running_total,
-    round(
-        100.0 * amount / sum(amount) over (), 2 
-    ) as pct_of_total
+select customer_id, total_amount
 from orders 
-order by order_date;
+where total_amount >= 100;
 
-select u.user_id, u.name
-from users u 
-left join orders o on u.user_id = o.user_id
-where o.order_id is NULL;
+select customer_id, count(*) as total_orders
+from orders 
+group by customer_id
+order by total_orders desc;
 
+select c.region, avg(o.total_amount) as avg_order_amount
+from orders o 
+join customers c on c.customer_id = o.customer_id
+group by c.region
+order by c.region;
 
-with monthly_customer_spending as (
+select *
+from orders
+where order_date >= current_date - interval '30 day';
+
+select c.customer_id, c.name 
+from customers c  
+left join orders o on o.customer_id = c.customer_id
+where o.order_id is null; 
+
+with ranked_orders as (
     select
-        c.customer_id,
-        c.customer_name,
-        date_trunc('month', o.order_date) as order_month,
-        sum(o.total_amount) as total_spent
-    from customers c 
-    join orders o on c.customer_id = o.customer_id
-    where o.status = 'completed'
-    group by c.customer_id, c.customer_name, date_trunc('month', o.order_date)
-),
-ranked_spending as (
-    select *,
-        dense_rank() over (
-            partition by order_month 
-            order by total_spent desc 
-        ) as rnk 
-    from monthly_customer_spending
+        customer_id,
+        order_id,
+        total_amount,
+        row_number() over (partition by customer_id 
+        order by total_amount desc) as rn
+    from orders
 )
-select customer_id, customer_name, order_month, total_spent
-from ranked_spending
-where rnk <= 2 
-order by order_month desc, rnk asc;
+select customer_id, order_id, total_amount
+from ranked_orders
+where rn = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
