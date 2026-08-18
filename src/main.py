@@ -1,3 +1,5 @@
+i got pandas somewhat too 
+
 import pandas as pd 
 
 df[df['amount'] > 50]
