@@ -20,8 +20,8 @@ class Product(BaseModel):
 
 class Employee(BaseModel):
     email: str 
-    age: int Field(gt=18)
-    salary: float Field(gt=0)
+    age: int = Field(gt=18)
+    salary: float = Field(gt=0)
 
 class Registration(BaseModel):
     username: str 
