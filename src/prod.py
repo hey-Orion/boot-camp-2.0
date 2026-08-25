@@ -39,8 +39,6 @@ def fetch_user_logs(username: str):
         return results
 
 
-
-
 import asyncio
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
