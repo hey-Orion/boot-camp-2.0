@@ -1,6 +1,6 @@
 # Workshops 2.0
 
-### A personal repository dedicated to hands-on coding practice with LCW sequence.
+### A personal repository dedicated to hands-on coding practice with interview preparation.
 
 This repository serves as my coding playground where I experiment with new concepts, solve programming exercises, build small projects, and strengthen my problem-solving skills through consistent practice.
 
@@ -10,6 +10,7 @@ This repository serves as my coding playground where I experiment with new conce
 - Programming challenges
 - Small experiments and prototypes
 - Miscellaneous code snippets
+- interview questions
 
 ### 🐢 Note
 
