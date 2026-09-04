@@ -24,3 +24,4 @@ Write both of your strongest project stories using Situation, Task, Action, Resu
 Makefile → Airflow migration — what was the situation before (manual make commands), what was the task/goal, what actions did you take, what was the measurable result (e.g., 5 commands → 1)?
 
 Docker/WSL2 debugging incident — pick the one consistent version of this story we flagged yesterday (path translation vs DB connectivity — or both, but know which is the headline), and structure it S-T-A-R.
+
