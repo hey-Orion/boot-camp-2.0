@@ -1,1 +1,0 @@
-orders_df['value_flags'] = np.where(orders_df['amount'] > 500, 'high_value', 'normal')
