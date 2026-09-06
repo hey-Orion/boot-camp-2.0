@@ -12,7 +12,8 @@ HAVING SUM(o.amount) > 10000;
 
 ```
 
-* `WHERE` filters individual rows prior to grouping; `HAVING` filters the computed group aggregates (`SUM`).
+* `WHERE` filters individual rows prior to grouping; `HAVING` filters 
+the computed group aggregates (`SUM`).
 
 ```sql
 -- Q2: Window function (LAG)
@@ -25,7 +26,8 @@ FROM orders;
 
 ```
 
-* `PARTITION BY` isolates calculations to each customer individually; `ORDER BY` establishes sequential row evaluation.
+* `PARTITION BY` isolates calculations to each customer 
+individually; `ORDER BY` establishes sequential row evaluation.
 
 ```sql
 -- Q3: CTE for Top-N per group
@@ -41,7 +43,8 @@ WHERE rnk = 1;
 
 ```
 
-* Calculates ranks in a CTE first because SQL rules prevent using window functions directly inside a `WHERE` clause.
+* Calculates ranks in a CTE first because SQL 
+rules prevent using window functions directly inside a `WHERE` clause.
 
 ```sql
 -- Q4: Multi-table join aggregation
@@ -64,7 +67,8 @@ HAVING COUNT(*) > 1;
 
 ```
 
-* Groups on multiple attributes simultaneously to isolate matching occurrences within the same window.
+* Groups on multiple attributes simultaneously to 
+isolate matching occurrences within the same window.
 
 ---
 
@@ -110,7 +114,8 @@ df = pd.json_normalize(data)
 
 ```
 
-* `json_normalize()` recursively expands nested dictionaries into flat DataFrame columns using dot notation.
+* `json_normalize()` recursively expands nested 
+dictionaries into flat DataFrame columns using dot notation.
 
 ```python
 # Q4: Sorting-based deduplication
@@ -118,7 +123,8 @@ orders_df = orders_df.sort_values('order_date').drop_duplicates(subset='order_id
 
 ```
 
-* Sorts chronologically so `keep='last'` reliably retains only the newest record version.
+* Sorts chronologically so `keep='last'` reliably 
+retains only the newest record version.
 
 ```python
 # Q5: Vectorized multi-condition logic
@@ -133,7 +139,8 @@ orders_df['value_flag'] = np.select(conditions, choices, default='low_value')
 
 ```
 
-* `np.select()` evaluates boolean condition lists in order without slow, row-by-row Python loops.
+* `np.select()` evaluates boolean condition lists
+in order without slow, row-by-row Python loops.
 
 ---
 
@@ -162,18 +169,22 @@ LIMIT 5;
 
 ```
 
+
+
+
 * Enforces mandatory execution order: `WHERE` → `GROUP BY` → `ORDER BY` → `LIMIT`.
 
 ```python
 # Q3: Corrected operator selection
 def validate_record(record):
-    if record['amount'] > 0 and record['status'] == 'completed':  # Fixed: replaced '=' with '=='
+    if record['amount'] > 0 and record['status'] == 'completed':
         return True
     return False
 
 ```
 
-* `==` tests logical equality; `=` is an invalid assignment operator inside a conditional step.
+* `==` tests logical equality; `=` is an invalid 
+assignment operator inside a conditional step.
 
 ```python
 # Q4: Deduplication logic (Correct code)
@@ -188,7 +199,8 @@ def dedupe(records):
 
 ```
 
-* Appends unseen IDs to track state and builds a unique output list (a set lookup would be faster, but this is functionally correct).
+* Appends unseen IDs to track state and builds a unique 
+output list (a set lookup would be faster, but this is functionally correct).
 
 ```python
 # Q5: Safe type conversion
@@ -200,7 +212,8 @@ avg = df['amount'].mean()
 
 ```
 
-* `pd.to_numeric(..., errors='coerce')` converts non-numeric strings or missing values to `NaN` instead of raising exceptions.
+* `pd.to_numeric(..., errors='coerce')` converts non-numeric 
+strings or missing values to `NaN` instead of raising exceptions.
 
 ---
 
@@ -242,7 +255,8 @@ if __name__ == "__main__":
 
 ```
 
-* Decouples extraction, validation, and loading into independent steps; uses Pydantic to filter bad records without crashing the execution flow.
+* Decouples extraction, validation, and loading into 
+independent steps; uses Pydantic to filter bad records without crashing the execution flow.
 
 ---
 
@@ -261,7 +275,8 @@ def two_sum(nums, target):
 
 ```
 
-* Stores seen values in a dictionary to achieve $O(n)$ time complexity by performing $O(1)$ complement lookups.
+* Stores seen values in a dictionary to achieve 
+$O(n)$ time complexity by performing $O(1)$ complement lookups.
 
 ```python
 # Q2: Linked List Reversal
@@ -282,4 +297,5 @@ def reverse_list(head):
 
 ```
 
-* Iteratively swaps pointer references forward using temporary tracking variables without copying nodes.
+* Iteratively swaps pointer references forward using 
+temporary tracking variables without copying nodes.

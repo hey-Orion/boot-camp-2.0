@@ -6,8 +6,7 @@ from customers c
 join orders o on c.customer_id = o.customer_id
 where c.customer_id IN (
     select customer_id
-    from orders
-    where status = 'cancelled'
+    from where status = 'cancelled'
 )
 group by c.customer_id, c.name;
 
@@ -19,7 +18,7 @@ select
 from orders;
 
 with first_orders as (
-    select 
+    select
         c.customer_id,
         c.signup_date,
         min(o.order_date) as first_order_date
@@ -27,7 +26,7 @@ with first_orders as (
     join customers c on c.customer_id = o.customer_id
     group by c.customer_id, c.signup_date
 )
-select 
+select
     avg(first_order_date - signup_date) as avg_day_to_first_order
 from first_orders;
 
@@ -35,8 +34,7 @@ from first_orders;
 order_summary = orders_df.groupby('customer_id').agg(
     total_orders=('order_id','count'),
     total_amount=('amount','sum'),
-    avg_amount=('amount','mean')
+    avg_amount=('amount','mean'),
 ).reset_index()
 
 orders_df.loc[orders_df.groupby('customer_id')['order_date'].idxmax()]
-
