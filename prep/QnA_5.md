@@ -3,11 +3,11 @@ Track 2 — Discussion: Low-tier surface pass
 
 What's the basic difference between an EC2 instance and S3 on AWS (or their GCP equivalents)?
 
-so an ec2 is a vm in aws mostly people host projects in it but its bascily a full computer so you can do mostly anything and s3 is a cloud db in aws you can use it with ssh or with ec2 as per your usege  
+so an ec2 is a vm in aws mostly people host projects in it but its bascily a full computer so you can do mostly anything and s3 is a cloud object sotrage in aws you can use it with ssh or with ec2 as per your usege  
 
 What is a VPC, in one sentence?
 
-a vpc is a decated claud service for your aws 
+a vpc is a decated claud service for your aws i it you cand define the inbound out bound etc
 
 What's the difference between authentication and authorization?
 
@@ -24,12 +24,8 @@ Prepare 5 genuine questions you'd ask an interviewer — about the role, team, s
 
 here are the questions 
 
-1 what would be my mojor focuse like what woul be my job 
-
-2 and will i we wroking with a team or not 
-
-3 and what is the cultuere like profsnal or caual so i adddress everyone with respect 
-
-4 and will there be a suporveiser above me to get help if i get stuck or somthing 
-
-5 lastly in future i would like to work wwith you gus in person like shifting to on site not right now but in future will that be posibale
+What does the current data stack look like, and are there any pain points in data stack
+How does the team currently handle pipeline failures or data quality issues
+What would success look like in this role after the first 3 months?"
+Is the team planning to scale the data infrastructure in any particular direction 
+How much ownership would I have over architecture decisions when i start
